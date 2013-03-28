@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block title %}Test{% endblock %}
+
+
+{% block body_container %}
+
+<div class="row">
+    
+    <div class="span10 offset1">
+        
+        <h1>UK vs Hobbitland Weather</h1><br>
+                
+        <div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+        
+        <br><br>
+        
+        <div id="disqus_thread"></div>
+           <script type="text/javascript">
+               /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+               var disqus_shortname = 'johnsandall'; // required: replace example with your forum shortname
+
+               /* * * DON'T EDIT BELOW THIS LINE * * */
+               (function() {
+                   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                   dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+               })();
+           </script>
+           <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+           <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+    </div>
+    
+</div><!-- /.row -->
+
+
+{% endblock %}
+
+{% block customjs %}
+<script>
+
+    $(document).ready(function(){
+        
+        $.fn.sort = function() {  
+            return this.pushStack( [].sort.apply( this, arguments ), []);  
+        };  
+
+        function sortDate(a,b){  
+             if (a[0] == b[0]){
+                 return 0;
+             }
+             return a[0]> b[0] ? 1 : -1;  
+         };
+        
+        $.get("/data/", function(response){
+            // Callback
+            var NZdata = [];
+            var NZhistdata = [];
+            var UKdata = [];
+            var UKhistdata = [];
+            for (var i = 0; i < response.length; i++) {
+                var entry = response[i]['fields'];
+                var entry_date = parseInt(entry['date']);
+                NZdata.push( [ entry_date, parseInt(entry['nzmin']), parseInt(entry['nzmax']) ] );
+                UKdata.push( [ entry_date, parseInt(entry['ukmin']), parseInt(entry['ukmax']) ] );
+                NZhistdata.push( [ entry_date, parseInt(entry['nzhistmin']), parseInt(entry['nzhistmax']) ] );
+                UKhistdata.push( [ entry_date, parseInt(entry['ukhistmin']), parseInt(entry['ukhistmax']) ] );
+            }
+            
+            
+            $.ajax({
+                url : "http://api.wunderground.com/api/0f54192d6585cd65/forecast/q/EGKK.json",
+                dataType : "jsonp",
+                success : function(UK_parsed_json) {
+                    $.ajax({
+                        url : "http://api.wunderground.com/api/0f54192d6585cd65/forecast/q/NZAA.json",
+                        dataType : "jsonp",
+                        success : function(NZ_parsed_json) {
+                            for (var i=0; i<=3; i++) {
+                                var UK_forecast_date = parseInt(UK_parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['epoch'])*1000;
+                                var UK_forecast_high = parseInt(UK_parsed_json['forecast']['simpleforecast']['forecastday'][i]['high']['celsius']);
+                                var UK_forecast_low = parseInt(UK_parsed_json['forecast']['simpleforecast']['forecastday'][i]['low']['celsius']);
+                                
+                                var NZ_forecast_date = parseInt(NZ_parsed_json['forecast']['simpleforecast']['forecastday'][i]['date']['epoch'])*1000;
+                                var NZ_forecast_high = parseInt(NZ_parsed_json['forecast']['simpleforecast']['forecastday'][i]['high']['celsius']);
+                                var NZ_forecast_low = parseInt(NZ_parsed_json['forecast']['simpleforecast']['forecastday'][i]['low']['celsius']);
+                                
+                                UKdata.push( [ UK_forecast_date, UK_forecast_low, UK_forecast_high ] );
+                                NZdata.push( [ NZ_forecast_date, NZ_forecast_low, NZ_forecast_high ] );
+                            }
+                            
+                            NZdata = $(NZdata).sort(sortDate);
+                            UKdata = $(UKdata).sort(sortDate);
+                            NZhistdata = $(NZhistdata).sort(sortDate);
+                            UKhistdata = $(UKhistdata).sort(sortDate);
+
+                            Highcharts.setOptions({
+                		    	chart: {
+                		        	backgroundColor: {
+                						linearGradient: [0, 0, 500, 500],
+                						stops: [
+                							[0, 'rgb(255, 255, 255)'],
+                							[1, 'rgb(240, 240, 255)']
+                		                    ]
+                		            },
+                					borderWidth: 2,
+                					plotBackgroundColor: 'rgba(255, 255, 255, .9)',
+                					plotShadow: true,
+                					plotBorderWidth: 1
+                		        }
+                		    });
+
+
+                	    	window.chart = new Highcharts.Chart({
+
+                			    chart: {
+                			        renderTo: 'container',
+                			        type: 'arearange',
+                			        zoomType: 'x'
+                			    },
+
+                			    title: {
+                			        text: 'Daily max/min temperatures - London (Gatwick) vs Auckland'
+                			    },
+
+                			    xAxis: {
+                			        type: 'datetime'
+                			    },
+
+                			    yAxis: {
+                			        title: {
+                			            text: null
+                			        }
+                			    },
+
+                			    tooltip: {
+                			        crosshairs: true,
+                			        shared: true,
+                			        valueSuffix: '°C'
+                			    },
+
+                			    legend: {
+                			        enabled: false
+                			    },
+
+                			    series: [
+                					{
+                			        	name: 'UK (Gatwick) - average historical temperature',
+                			        	data: UKhistdata,
+                						color: '#99C2FF'
+                			    	},
+                					{
+                			        	name: 'New Zealand (Auckland) - average historical temperature',
+                			        	data: NZhistdata,
+                						color: '#FFB280'
+                			    	},
+                					{
+                			        	name: 'UK (Gatwick)',
+                			        	data: UKdata,
+                						color: '#0066FF'
+                			    	},
+                					{
+                			        	name: 'New Zealand (Auckland)',
+                			        	data: NZdata,
+                						color: '#FF6600'
+                			    	}
+                				]
+
+                			}); // window.chart
+                        } // NZ success function
+                    }); // NZ forecast ajax
+                } // UK success function
+            }); // UK forecast ajax
+        }); // $.get
+    }); // document.ready
+
+</script>
+{% endblock customjs %}
