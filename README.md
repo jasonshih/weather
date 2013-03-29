@@ -22,6 +22,9 @@ Changelog
     * Includes [ShareThis](http://sharethis.com/) sharebar
     * Includes [Disqus](http://disqus.com/) comments
     * Locally hosted
+    
+* **v1.1** (29/3/13)
+    * Reorganised code base
 
 
 TODO:
@@ -41,7 +44,6 @@ TODO:
     - This can make page load VERY slow (i.e. if 2 weeks have passed, it can take up to 5 minutes)
     - Therefore, add python script on server that runs every day at e.g. 00:01 (or maybe 01:00 to be safe) pulling in data into database
 * Comment code base
-* Reorganise Django project with "base" project instead of "WAS", etc
     
     
     

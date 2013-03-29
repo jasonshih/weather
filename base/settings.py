@@ -1,4 +1,4 @@
-# Django settings for WAS project.
+# Django settings for base project.
 import os.path
 
 DEBUG = True
@@ -99,10 +99,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'WAS.urls'
+ROOT_URLCONF = 'base.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'WAS.wsgi.application'
+WSGI_APPLICATION = 'base.wsgi.application'
 
 
 TEMPLATE_DIRS = (

@@ -7,11 +7,12 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-	url(r'^$', test),
-	url(r'^data/$', data),
+	url(r'^$', test), # Home page
+	url(r'^data/$', data), # AJAX page
+
     # Examples:
-    # url(r'^$', 'WAS.views.home', name='home'),
-    # url(r'^WAS/', include('WAS.foo.urls')),
+    # url(r'^$', 'base.views.home', name='home'),
+    # url(r'^base/', include('base.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -3,11 +3,11 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    John Sandall -- Sole developer -- @John_Sandall
 
 # THANKS
 
-    <name>
+    Dad & Anna for the inspiration
 
 # TECHNOLOGY COLOPHON
 
