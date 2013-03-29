@@ -23,8 +23,8 @@ Changelog
     * Includes [Disqus](http://disqus.com/) comments
     * Locally hosted
     
-* **v1.1** (29/3/13)
-    * Reorganised code base
+* **v1.1 (in development)** (29/3/13)
+    * Reorganised & commented code base
 
 
 TODO:
@@ -43,7 +43,6 @@ TODO:
     - Wunderground API has some limits (i.e. 10 calls / minute), which means that if more than ~4 days have passed since someone last looked at this mini-app, there's a one-minute sleep timer built into the script to ensure I don't run over my API limit
     - This can make page load VERY slow (i.e. if 2 weeks have passed, it can take up to 5 minutes)
     - Therefore, add python script on server that runs every day at e.g. 00:01 (or maybe 01:00 to be safe) pulling in data into database
-* Comment code base
     
     
     
