@@ -5,9 +5,9 @@ Mini weather app to compare max/min + historical temperatures between Gatwick, U
 
 Stack
 -----
- * **Backend:** Django, MySQL
- * **Frontend:** Bootstrap, jQuery
- * **Data:** Wunderground.com
+ * **Backend:** [Python + Django](https://www.djangoproject.com/), [MySQL](http://www.mysql.com)
+ * **Frontend:** [Bootstrap](http://twitter.github.com/bootstrap/), [jQuery](http://jquery.com/)
+ * **Data:** [Wunderground.com](http://www.wunderground.com/)
 
 
 Changelog
