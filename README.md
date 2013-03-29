@@ -6,7 +6,7 @@ Mini weather app to compare max/min + historical temperatures between Gatwick, U
 Stack
 -----
  * **Backend:** [Python + Django](https://www.djangoproject.com/), [MySQL](http://www.mysql.com)
- * **Frontend:** [Bootstrap](http://twitter.github.com/bootstrap/), [jQuery](http://jquery.com/)
+ * **Frontend:** [Bootstrap](http://twitter.github.com/bootstrap/), [jQuery](http://jquery.com/), [HighCharts](http://www.highcharts.com/)
  * **Data:** [Wunderground.com](http://www.wunderground.com/)
 
 
@@ -19,8 +19,8 @@ Changelog
     * Records are cached into a MySQL database upon pageload
     * Actual & historical averages are pulled from the Wunderground weather data API
     * Forecasts are scraped from the Wunderground forecast HTML
-    * Includes ShareThis sharebar
-    * Includes Disqus comments
+    * Includes [ShareThis](http://sharethis.com/) sharebar
+    * Includes [Disqus](http://disqus.com/) comments
     * Locally hosted
 
 
