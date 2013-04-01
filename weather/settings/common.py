@@ -108,7 +108,6 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     normpath(join(DJANGO_ROOT, 'assets')),
-    normpath(join(DJANGO_ROOT, 'apps/compare/static')),
 )
 
 # List of finder classes that know how to find static files in various
