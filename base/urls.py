@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from weather.views import test, data
+from base.apps.weather.views import test, data
 
 
 # Uncomment the next two lines to enable the admin:

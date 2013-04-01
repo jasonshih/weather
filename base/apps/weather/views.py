@@ -7,10 +7,10 @@ from django.core.cache import cache
 import json
 import time
 import urllib2
-from weather.models import Weather
+from base.apps.weather.models import Weather
 from django.utils import simplejson
 from django.core import serializers
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 import sched, time
 
 
