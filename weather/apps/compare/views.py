@@ -7,7 +7,7 @@ from django.core.cache import cache
 import json
 import time
 import urllib2
-from base.apps.weather.models import Weather
+from weather.apps.compare.models import Weather
 from django.utils import simplejson
 from django.core import serializers
 from bs4 import BeautifulSoup
