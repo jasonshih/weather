@@ -30,7 +30,7 @@ Changelog
         * Would be fixed by daily background process grabbing the API data; might be possible to scrape or use different source?
     * *Issue:* Looks like HTML is scraping fahrenheit instead of celsius now from the Wundeground almanac
 
- * **v1.0** (29/3/13)
+* **v1.0** (29/3/13)
     * Working version, uploaded to GitHub
     * Displays max/min current & historical temperatures for UK (Gatwick) & NZ (Auckland)
     * Uses HighCharts interface for displaying data
