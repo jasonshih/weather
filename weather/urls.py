@@ -22,6 +22,7 @@ urlpatterns = patterns('',
 	url(r'^admin/', include(admin.site.urls)),
 )
 
+# Code below is a stopgap for Gunicorn to serve static files until Amazon S3 can be integrated; remove ASAP
 if not settings.DEBUG:
     urlpatterns += patterns('',
         (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
